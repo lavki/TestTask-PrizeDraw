@@ -78,6 +78,8 @@ class AuthenticationController extends AbstractActionController
             }
         }
 
+        $this->layout()->setTemplate( '/layout/login.phtml' );
+
         return new ViewModel([
             'form'         => $form,
             'error'        => $error ?? false,

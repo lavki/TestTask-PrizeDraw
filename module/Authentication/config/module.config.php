@@ -2,6 +2,7 @@
 
 namespace Authentication;
 
+use Zend\Authentication\AuthenticationService;
 use Zend\Router\Http\Literal;
 
 return [
@@ -33,6 +34,14 @@ return [
     'controllers' => [
         'factories' => [
             Controller\AuthenticationController::class => Controller\Factory\AuthenticationControllerFactory::class,
+        ],
+    ],
+
+    'service_manager' => [
+        'factories' => [
+            AuthenticationService::class         => Service\Factory\AuthenticationServiceFactory::class,
+            Service\AuthenticationAdapter::class => Service\Factory\AuthenticationAdapterFactory::class,
+            Service\AuthenticationManager::class => Service\Factory\AuthenticationManagerFactory::class,
         ],
     ],
 

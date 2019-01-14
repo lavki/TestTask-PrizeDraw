@@ -1,30 +1,29 @@
 <?php
 
-namespace Authentication\Controller\Factory;
+namespace Authentication\Service\Factory;
 
+use Zend\Db\Adapter\AdapterInterface;
 use Interop\Container\ContainerInterface;
-use Authentication\Service\AuthenticationManager;
 use Zend\ServiceManager\Factory\FactoryInterface;
+use Authentication\Service\AuthenticationAdapter;
 use Interop\Container\Exception\ContainerException;
-use Authentication\Controller\AuthenticationController;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 
 /**
- * Class AuthenticationControllerFactory
- * @package Authentication\Controller\Factory
+ * Class AuthenticationAdapterFactory
+ * @package Authentication\Service\Factory
  */
-class AuthenticationControllerFactory implements FactoryInterface
+class AuthenticationAdapterFactory implements FactoryInterface
 {
     /**
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param array|null $options
-     * @return AuthenticationController
+     * @return AuthenticationAdapter
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $authenticationManager = $container->get(AuthenticationManager::class);
-        return new AuthenticationController( $authenticationManager );
+        return new AuthenticationAdapter( $container->get(AdapterInterface::class) );
     }
 }

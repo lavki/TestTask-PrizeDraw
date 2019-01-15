@@ -25,22 +25,6 @@ class IndexController extends AbstractActionController
      */
     use RafflePrize;
 
-    /**
-     * @var PrizeRepository
-     */
-    private $prizeRepository;
-
-    /**
-     * IndexController constructor.
-     * @param PrizeRepository $prizeRepository
-     * @param PrizeTypeRepository $prizeTypeRepository
-     */
-    public function __construct( PrizeRepository $prizeRepository, PrizeTypeRepository $prizeTypeRepository )
-    {
-        $this->prizeRepository     = $prizeRepository;
-        $this->prizeTypeRepository = $prizeTypeRepository;
-    }
-
     public function indexAction()
     {
         return new ViewModel([

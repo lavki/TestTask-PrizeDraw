@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 14 2019 г., 19:18
+-- Время создания: Янв 14 2019 г., 19:35
 -- Версия сервера: 5.7.21
 -- Версия PHP: 7.2.10
 
@@ -33,7 +33,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --

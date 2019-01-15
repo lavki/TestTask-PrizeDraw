@@ -1,11 +1,19 @@
+<?php
+
+$title = 'Raffle Prizes';
+
+$this->headTitle($title);
+
+?>
+
 <div class="jumbotron text-center">
     <h1>Welcome to <span class="zf-green">Your own game room</span></h1>
     <h2>You need to click on the button and get a casual prize.</h2>
 
     <p>
-        <a class="btn btn-success btn-lg" href="#">
+        <button class="btn btn-success btn-lg" id="rafflePrizes">
             Get Prize
-        </a>
+        </button>
     </p>
 </div>
 
@@ -18,12 +26,7 @@
             </div>
             <div class="panel-body">
                 <p>
-                    Zend Framework is under active development. If you are
-                    interested in following the development of ZF, you can check
-                    <a href="http://framework.zend.com/blog/">ZF dev blog</a>,
-                    and <a href="https://github.com/issues?utf8=%E2%9C%93&amp;q=is:issue+org:zendframework">ZF issue tracker</a>
-                    (link requires a GitHub account). This is a great resource
-                    for staying up to date with the latest developments!
+                    <?php var_dump($this->prize); ?>
                 </p>
 
                 <p><a class="btn btn-success pull-right" href="http://framework.zend.com/" target="_blank">ZF Development Portal &raquo;</a></p>
@@ -69,3 +72,8 @@
         </div>
     </div>
 </div>
+
+<?php
+
+$this->inlineScript()
+    ->offsetSetFile(20, $this->basePath('js/raffle-prizes.js'));

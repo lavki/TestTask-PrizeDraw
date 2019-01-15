@@ -24,12 +24,29 @@ return [
                     ],
                 ],
             ],
+            'raffle-prizes' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/raffle-prizes',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'rafflePrizes',
+                    ],
+                ],
+            ],
         ],
     ],
 
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
+            Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
+        ],
+    ],
+
+    'service_manager' => [
+        'factories' => [
+            Repository\PrizeRepository::class     => Repository\Factory\PrizeRepositoryFactory::class,
+            Repository\PrizeTypeRepository::class => Repository\Factory\PrizeTypeRepositoryFactory::class,
         ],
     ],
 
@@ -59,5 +76,6 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
+        'strategies'   => ['ViewJsonStrategy'],
     ],
 ];

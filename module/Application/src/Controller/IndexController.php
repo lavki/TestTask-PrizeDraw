@@ -10,8 +10,6 @@ namespace Application\Controller;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Application\Service\RafflePrize;
-use Application\Repository\PrizeRepository;
-use Application\Repository\PrizeTypeRepository;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
@@ -37,8 +35,7 @@ class IndexController extends AbstractActionController
         if( $this->getRequest()->isXmlHttpRequest() ) // if ajax
         {
             $randomPrize = $this->getRandomPrize();
-
-            $response = json_encode(['rafflePrize' => $randomPrize]);
+            $response    = json_encode(['winningPrize' => $randomPrize]);
 
             $view = new JsonModel([$response]);
             $view->setTerminal(true);

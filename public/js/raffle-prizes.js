@@ -11,7 +11,14 @@ $(document).ready(function () {
             type:     'POST',
             dataType: 'JSON',
             success: function (data) {
-                console.log(data);
+                var data = $.parseJSON(data);
+                var winningPrize = data.winningPrize;
+
+                for( var key in winningPrize )
+                {
+                    $('#PrizeTitle').text(key);
+                    $('#PrizeValue').text(winningPrize[key]);
+                }
             }
         });
     });

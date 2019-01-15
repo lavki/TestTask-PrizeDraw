@@ -56,7 +56,7 @@ return [
         ],
         'controllers' => [
             Controller\IndexController::class => [
-                ['actions' => ['index', 'cabinet'],  'allow' => '@'], // Allow authorized users to visit this actions
+                ['actions' => ['index', 'rafflePrizes'],  'allow' => '@'], // Allow authorized users to visit this actions
             ],
         ]
     ],

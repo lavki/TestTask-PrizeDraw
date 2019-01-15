@@ -16,9 +16,11 @@ $(document).ready(function () {
 
                 for( var key in winningPrize )
                 {
-                    $('#PrizeTitle').text(key);
+                    $('#PrizeTitle').text('Congratulation! You won ' + key);
                     $('#PrizeValue').text(winningPrize[key]);
                 }
+
+                $('#winnerPrize').attr('style', 'display: block');
             }
         });
     });

@@ -10,6 +10,7 @@ namespace Application\Controller;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Application\Service\RafflePrize;
+use Application\Service\ConvertManager;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
@@ -21,7 +22,7 @@ class IndexController extends AbstractActionController
     /**
      * Selecting random Prize functionality
      */
-    use RafflePrize;
+    use RafflePrize, ConvertManager;
 
     public function indexAction()
     {

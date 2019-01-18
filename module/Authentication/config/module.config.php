@@ -40,8 +40,8 @@ return [
     'service_manager' => [
         'factories' => [
             AuthenticationService::class         => Service\Factory\AuthenticationServiceFactory::class,
-            Service\AuthenticationAdapter::class => Service\Factory\AuthenticationAdapterFactory::class,
             Service\AuthenticationManager::class => Service\Factory\AuthenticationManagerFactory::class,
+            Service\AuthenticationAdapter::class => Service\Factory\AuthenticationAdapterFactory::class,
         ],
     ],
 

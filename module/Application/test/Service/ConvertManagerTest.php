@@ -5,6 +5,10 @@ namespace ApplicationTest\Service;
 use Application\Service\ConvertManager;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
+/**
+ * Class ConvertManagerTest
+ * @package ApplicationTest\Service
+ */
 class ConvertManagerTest extends AbstractHttpControllerTestCase
 {
     public function testConvertMoneyToBonusCanBeAccessed()

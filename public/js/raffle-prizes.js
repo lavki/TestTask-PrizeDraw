@@ -11,6 +11,9 @@ $(document).ready(function () {
             type:     'POST',
             dataType: 'JSON',
             success: function (data) {
+
+                $('#rafflePrizes').remove();
+
                 var data = $.parseJSON(data);
                 var winningPrize = data.winningPrize;
 
@@ -20,6 +23,14 @@ $(document).ready(function () {
                     $('#PrizeValue').text(winningPrize[key]);
                 }
 
+                var options = data.options;
+                var buttons = '';
+                for( var key in options )
+                {
+                    buttons += '<button class="btn btn-default">'+options[key]+'</button>';
+                }
+
+                $('#prizeOption').html(buttons);
                 $('#winnerPrize').attr('style', 'display: block');
             }
         });

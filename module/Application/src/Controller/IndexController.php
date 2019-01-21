@@ -36,7 +36,23 @@ class IndexController extends AbstractActionController
         if( $this->getRequest()->isXmlHttpRequest() ) // if ajax
         {
             $randomPrize = $this->getRandomPrize();
-            $response    = json_encode(['winningPrize' => $randomPrize]);
+
+            if( array_key_exists('Item', $randomPrize) ) {
+                $option = [
+                    'confirm' => 'Pick up',
+                    'reject'  => 'Reject'];
+
+            } elseif( array_key_exists('Money', $randomPrize) ) {
+                $option = [
+                    'convert' => 'Convert to Loyalty account',
+                    'send'    => 'Send to bank account'];
+
+            } elseif( array_key_exists('Bonus', $randomPrize) ) {
+                $option = [
+                    'take' => 'Take the points won'];
+            }
+
+            $response = json_encode(['winningPrize' => $randomPrize, 'options' => $option]);
 
             $view = new JsonModel([$response]);
             $view->setTerminal(true);

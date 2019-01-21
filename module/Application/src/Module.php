@@ -8,15 +8,19 @@
 namespace Application;
 
 use Zend\Mvc\MvcEvent;
+use Zend\Console\Adapter\AdapterInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Authentication\Service\AuthenticationManager;
 use Authentication\Controller\AuthenticationController;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 
 /**
  * Class Module
  * @package Application
  */
-class Module
+class Module implements ConfigProviderInterface, ConsoleBannerProviderInterface, ConsoleUsageProviderInterface
 {
     const VERSION = '3.0.3-dev';
 
@@ -61,17 +65,41 @@ class Module
         if( $controllerName != AuthenticationController::class && !$authManager->filterAccess($controllerName, $actionName) )
         {
             // Remember the URL of the page the user tried to access. We will redirect the user to that URL after successful login.
-            $uri = $event->getApplication()->getRequest()->getUri();
-            // Make the URL relative (remove scheme, user info, host name and port) to avoid redirecting to other domain by a malicious user.
-            $uri->setScheme(null)
-                ->setHost(null)
-                ->setPort(null)
-                ->setUserInfo(null);
-            $redirectUrl = $uri->toString();
+//            $uri = $event->getApplication()->getRequest()->getUri();
+            $request = $event->getApplication()->getServiceManager()->get('Request');
+            //$uri = $request->getUri();
+            if( method_exists($request, 'getUri') )
+            {
+                $uri = $request->getUri();
+                // Make the URL relative (remove scheme, user info, host name and port) to avoid redirecting
+                // to other domain by a malicious user.
+                $uri->setScheme(null)
+                    ->setHost(null)
+                    ->setPort(null)
+                    ->setUserInfo(null);
+                $redirectUrl = $uri->toString();
 
-            // Redirect the user to the "Login" page.
-            return $controller->redirect()->toRoute('login', [],
-                ['query'=> ['redirect-url' => $redirectUrl]]);
+                // Redirect the user to the "Login" page.
+                return $controller->redirect()->toRoute('login', [],
+                    ['query'=> ['redirect-url' => $redirectUrl]]);
+            }
         }
+    }
+
+    /**
+     * This method is defined in ConsoleBannerProviderInterface
+     */
+    public function getConsoleBanner(AdapterInterface $console)
+    {
+        return "CLI for send money to user bank account";
+    }
+
+    public function getConsoleUsage(AdapterInterface $console)
+    {
+        return [
+            'send money'             => 'Send money to user bank account',
+            'select'                 => 'Run automated jobs',
+            '(enable|disable) debug' => 'Enable or disable debug mode for the application.',
+        ];
     }
 }

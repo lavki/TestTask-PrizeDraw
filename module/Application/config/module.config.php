@@ -37,9 +37,27 @@ return [
         ],
     ],
 
+    'console' => [
+        'router' => [
+            'routes' => [
+                'send-money' => [
+                    'options' => [
+//                        'route'    => 'send [all|disabled|deleted]:mode money [--verbose|-v]',
+                        'route'    => 'send money [all|disabled|deleted]:mode [--verbose|-v]',
+                        'defaults' => [
+                            'controller' => Controller\ConsoleController::class,
+                            'action'     => 'send-money-to-user-bank-account',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
+            Controller\IndexController::class   => Controller\Factory\IndexControllerFactory::class,
+            Controller\ConsoleController::class => InvokableFactory::class,
         ],
     ],
 
